@@ -25,7 +25,7 @@ const loadAllRoutes = async (): Promise<Router> => {
     routes: [
       {
         path: '/',
-        redirect: { name: 'dashboard' },
+        redirect: { name: 'splash-screen' },
       },
 
       // Auto register routes

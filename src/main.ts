@@ -16,9 +16,6 @@ import eventBus from './plugins/mitt';
 import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 
-// Primevue Theme
-import Aura from '@primevue/themes/aura';
-
 // Stylesheets
 import './style.css';
 
@@ -33,12 +30,7 @@ const initialize = async () => {
   app.use(ConfirmationService);
   app.use(pinia);
   app.use(PrimeVue, {
-    theme: {
-      preset: Aura,
-      options: {
-        darkModeSelector: '.my-app-dark',
-      },
-    },
+    theme: 'none',
   });
   app.use(router);
 
