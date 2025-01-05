@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+// Primeui
+import primeui from 'tailwindcss-primeui';
+
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -7,10 +10,53 @@ export default {
         black: '#252F4A',
         'light-pink': '#FEECF1',
         muted: '#8C919D',
-        orange: '#FE9B4B',
         pink: '#F35F8B',
         primary: '#00A624',
         secondary: '#E3FFD9',
+        'app-primary': {
+          900: '#18090E',
+          700: '#24191B',
+          500: '#333333',
+          400: '#848484',
+          300: '#C1C1C1',
+          200: '#EAEAEA',
+        },
+        'app-accent': {
+          900: '#7A230C',
+          700: '#B7501F',
+          500: '#FF923F',
+          300: '#FFCA8B',
+          200: '#FFF1D8',
+        },
+        'app-neutral': {
+          900: '#252525',
+          700: '#929292',
+          500: '#BEBEBE',
+          300: '#D3D3D3',
+          200: '#E9E9E9',
+        },
+        'app-semantic': {
+          success: {
+            300: '#7BC760',
+            200: '#BDE3B0',
+            100: '#e5f4df',
+          },
+          warning: {
+            300: '#E9E9E9',
+            200: '#D3D3D3',
+            100: '#BEBEBE',
+          },
+          error: {
+            300: '#FF7171',
+            200: '#FFE3E3',
+            100: '#FFB8B8',
+          },
+          info: {
+            300: '#5CB1FF',
+            200: '#EFF7FF',
+            100: '#AED8FF',
+          },
+        },
       },
       container: {
         padding: {
@@ -52,6 +98,5 @@ export default {
       },
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [primeui],
 };

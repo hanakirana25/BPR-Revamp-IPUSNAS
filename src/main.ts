@@ -17,7 +17,8 @@ import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 
 // Stylesheets
-import './style.css';
+import './app/assets/styles/main.css';
+import './app/assets/styles/variables.css';
 
 // SVG Icons
 import 'virtual:svg-icons-register';
@@ -26,12 +27,16 @@ const initialize = async () => {
   const app = createApp(App);
   const router = await loadAllRoutes();
 
-  // Use everything what we have
-  app.use(ConfirmationService);
+  // Inject Pinia
   app.use(pinia);
+
+  // Inject PrimeVue
+  app.use(ConfirmationService);
   app.use(PrimeVue, {
     theme: 'none',
   });
+
+  // Inject Vue Router
   app.use(router);
 
   // Register global event bus

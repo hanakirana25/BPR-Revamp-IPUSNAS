@@ -161,7 +161,7 @@ eventBus.on(EToastType.DANGER, (params: unknown) => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;

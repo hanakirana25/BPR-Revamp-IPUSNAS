@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
+@import url('https://db.onlinewebfonts.com/c/3c76d979e72206bc554a1863d96ac5d4?family=Neue+Haas+Grotesk+Text+Pro');
+@import 'primeicons/primeicons.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../primevue/tailwind.css';
+@import './theme.css';
+
+body {
+  background: #f7f7f7;
+  font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+}

@@ -8,7 +8,7 @@
       <section id="btn-actions" class="flex flex-col gap-4">
         <Button
           as="router-link"
-          class="bg-primary font-bold font-neue-text-pro text-center text-sm text-white p-4 rounded-md [&>span]:text-sm"
+          class="bg-primary font-bold font-neue-text-pro h-[52px] text-center text-sm text-white p-4 rounded-md [&>span]:text-sm"
           label="Sign Up"
           size="large"
           to="/authentication/sign-up"
@@ -16,10 +16,10 @@
 
         <Button
           as="router-link"
-          class="bg-secondary font-bold font-neue-text-pro text-center text-primary text-sm p-4 rounded-md [&>span]:text-sm"
-          label="Sign In"
+          class="!bg-secondary border-none font-bold font-neue-text-pro h-[52px] text-center !text-primary text-sm p-4 rounded-md [&>span]:text-sm"
+          label="Login"
           size="large"
-          to="/authentication/sign-in"
+          to="/authentication/login"
         />
       </section>
     </section>

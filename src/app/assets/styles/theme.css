@@ -1,0 +1,67 @@
+@import './variables.css';
+
+/* Light */
+:root {
+  --p-primary-color: var(--p-primary-500);
+  --p-primary-contrast-color: var(--p-surface-0);
+  --p-primary-hover-color: var(--p-primary-600);
+  --p-primary-active-color: var(--p-primary-700);
+  --p-neutral-color-100: var(--p-neutral-100);
+  --p-neutral-color-200: var(--p-neutral-200);
+  --p-neutral-color-300: var(--p-neutral-300);
+  --p-neutral-color-400: var(--p-neutral-400);
+  --p-neutral-color-500: var(--p-neutral-500);
+  --p-neutral-color-600: var(--p-neutral-600);
+  --p-neutral-color-700: var(--p-neutral-700);
+  --p-neutral-color-800: var(--p-neutral-800);
+  --p-neutral-color-900: var(--p-neutral-900);
+  --p-content-border-color: var(--p-surface-200);
+  --p-content-hover-background: var(--p-surface-100);
+  --p-content-hover-color: var(--p-surface-800);
+  --p-highlight-background: var(--p-primary-50);
+  --p-highlight-color: var(--p-primary-700);
+  --p-highlight-focus-background: var(--p-primary-100);
+  --p-highlight-focus-color: var(--p-primary-800);
+  --p-text-color: var(--p-surface-700);
+  --p-text-white: var(--p-neutral-100);
+  --p-text-hover-color: var(--p-surface-800);
+  --p-text-muted-color: var(--p-surface-500);
+  --p-text-hover-muted-color: var(--p-surface-600);
+}
+
+/*
+* Dark Mode
+* Defaults to system, change the selector to match the darkMode in tailwind.config.
+* For example;
+* darkMode: ['selector', '[class*="app-dark"]']
+* should be;
+* :root[class="app-dark"] {
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --p-primary-color: var(--p-primary-500);
+    --p-primary-contrast-color: var(--p-surface-900);
+    --p-primary-hover-color: var(--p-primary-300);
+    --p-primary-active-color: var(--p-primary-200);
+    --p-neutral-color-100: var(--p-neutral-100);
+    --p-neutral-color-200: var(--p-neutral-200);
+    --p-neutral-color-300: var(--p-neutral-300);
+    --p-neutral-color-400: var(--p-neutral-400);
+    --p-neutral-color-500: var(--p-neutral-500);
+    --p-neutral-color-600: var(--p-neutral-600);
+    --p-neutral-color-700: var(--p-neutral-700);
+    --p-neutral-color-800: var(--p-neutral-800);
+    --p-neutral-color-900: var(--p-neutral-900);
+    --p-content-border-color: var(--p-surface-700);
+    --p-content-hover-background: var(--p-surface-800);
+    --p-content-hover-color: var(--p-surface-0);
+    --p-highlight-background: color-mix(in srgb, var(--p-primary-400), transparent 84%);
+    --p-highlight-color: rgba(255, 255, 255, 0.87);
+    --p-highlight-focus-background: color-mix(in srgb, var(--p-primary-400), transparent 76%);
+    --p-highlight-focus-color: rgba(255, 255, 255, 0.87);
+    --p-text-color: var(--p-surface-0);
+    --p-text-hover-color: var(--p-surface-0);
+    --p-text-muted-color: var(--p-surface-400);
+    --p-text-hover-muted-color: var(--p-surface-300);
+  }
+}

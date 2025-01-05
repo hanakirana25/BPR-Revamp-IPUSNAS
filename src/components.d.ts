@@ -11,7 +11,11 @@ declare module 'vue' {
     AppBaseSvg: typeof import('./app/components/base/AppBaseSvg.vue')['default']
     AppBaseToast: typeof import('./app/components/base/AppBaseToast.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
+    FloatLabel: typeof import('primevue/floatlabel')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
+    InputText: typeof import('primevue/inputtext')['default']
+    Password: typeof import('primevue/password')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
