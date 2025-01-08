@@ -17,6 +17,8 @@ import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 
 // Stylesheets
+import 'swiper/css';
+import 'swiper/css/pagination';
 import './app/assets/styles/main.css';
 import './app/assets/styles/variables.css';
 

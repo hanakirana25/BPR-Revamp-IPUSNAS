@@ -6,14 +6,25 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'card-editor-picks': 'linear-gradient(180deg, #F9F9F9 0%, #F9F9F9 100%)',
+      },
+      boxShadow: {
+        'custom-bottom-navbar': '0px -4px 16px 0px rgba(0, 0, 0, 0.05)',
+        'custom-our-recommendation': '0px 4px 20px 0px rgba(0, 0, 0, 0.05)',
+      },
       colors: {
         black: '#252F4A',
+        'custom-orange': '#FE9B4B',
         'light-gray': '#F9F9F9',
         'light-pink': '#FEECF1',
         muted: '#8C919D',
         pink: '#F35F8B',
         primary: '#00A624',
         secondary: '#E3FFD9',
+        'secondary-muted': '#CFD2D7',
+        'secondary-gray': '#8F8F8F',
+        gray: '#ACABAB',
         'app-primary': {
           900: '#18090E',
           700: '#24191B',
@@ -75,11 +86,6 @@ export default {
       fontSize: {
         sm: '0.8rem',
         base: '1rem',
-        xl: '1.25rem',
-        '2xl': '1.563rem',
-        '3xl': '1.953rem',
-        '4xl': '2.441rem',
-        '5xl': '3.052rem',
       },
       height: {
         'dynamic-view': '100dvh',
