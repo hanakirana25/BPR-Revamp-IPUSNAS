@@ -17,6 +17,7 @@ export default {
         black: '#252F4A',
         'custom-orange': '#FE9B4B',
         'light-gray': '#F9F9F9',
+        'light-orange': '#FFE1C9',
         'light-pink': '#FEECF1',
         muted: '#8C919D',
         pink: '#F35F8B',
