@@ -16,6 +16,8 @@ export default {
       colors: {
         black: '#252F4A',
         'custom-orange': '#FE9B4B',
+        'divider-gray': '#CAC9C9',
+        'divider-muted': '#EBEBEB',
         'light-gray': '#F9F9F9',
         'light-orange': '#FFE1C9',
         'light-pink': '#FEECF1',
