@@ -161,7 +161,6 @@ const onClose = (): void => {
 };
 
 eventBus.on('AppBaseToast', (params: unknown) => {
-  console.log('params', params);
   toast.value = params as IProps;
 });
 </script>

@@ -67,7 +67,7 @@ export const useAuthenticationSignUpService = () => {
         ...httpAbort_registerAbort(AUTHENTICATION_SIGNUP_REQUEST),
       });
 
-      eventBus.emit(EToastType.SUCCESS, {
+      eventBus.emit('AppBaseToast', {
         isOpen: true,
         title: 'Success',
         message: 'You have successfully signed up.',
