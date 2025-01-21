@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'notification',
-        component: () => import('../views/Notification.vue'),
+        component: () => import('../views/NotificationUI.vue'),
         meta: {
           requiresAuthorization: false,
           layout: LAYOUT_OPTIONS.EMPTY,

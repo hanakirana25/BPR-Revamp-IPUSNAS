@@ -1,6 +1,11 @@
+// Axios
 import axios, { type InternalAxiosRequestConfig, type AxiosInstance, type AxiosError } from 'axios';
-import eventBus from '../mitt';
+
+// Constants
 import { EToastPosition, EToastType } from '@/app/constants/toast.constant';
+
+// Mitt
+import eventBus from '../mitt';
 
 const httpClient: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API_URL ? `${import.meta.env.VITE_APP_BASE_API_URL}` : '/api',
@@ -13,7 +18,7 @@ httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   return config;
 });
 
-httpClient.interceptors.response.use(undefined, (error: AxiosError<{ message?: string }>) => {
+httpClient.interceptors.response.use(undefined, (error: AxiosError<{ error?: string; message?: string }>) => {
   /**
    * @description Here's we can handle various errors.
    */
@@ -21,7 +26,8 @@ httpClient.interceptors.response.use(undefined, (error: AxiosError<{ message?: s
     case 400:
       eventBus.emit(EToastType.DANGER, {
         isOpen: true,
-        message: error.response?.data?.message ?? 'Bad Request',
+        title: error.response?.data?.message ?? 'Bad Request',
+        message: error.response?.data?.error,
         position: EToastPosition.TOP_RIGHT,
         type: EToastType.DANGER,
       });
@@ -29,7 +35,8 @@ httpClient.interceptors.response.use(undefined, (error: AxiosError<{ message?: s
     case 401:
       eventBus.emit(EToastType.DANGER, {
         isOpen: true,
-        message: error.response?.data?.message ?? 'Unauthorized',
+        title: error.response?.data?.message ?? 'Unauthorized',
+        message: error.response?.data?.error,
         position: EToastPosition.TOP_RIGHT,
         type: EToastType.DANGER,
       });
@@ -37,7 +44,8 @@ httpClient.interceptors.response.use(undefined, (error: AxiosError<{ message?: s
     case 500:
       eventBus.emit(EToastType.DANGER, {
         isOpen: true,
-        message: error.response?.data?.message ?? 'Internal Server Error',
+        title: error.response?.data?.message ?? 'Internal Server Error',
+        message: error.response?.data?.error,
         position: EToastPosition.TOP_RIGHT,
         type: EToastType.DANGER,
       });
@@ -45,7 +53,8 @@ httpClient.interceptors.response.use(undefined, (error: AxiosError<{ message?: s
     default:
       eventBus.emit(EToastType.DANGER, {
         isOpen: true,
-        message: error.response?.data?.message ?? 'Something went wrong',
+        title: error.response?.data?.message ?? 'Something went wrong',
+        message: error.response?.data?.error,
         position: EToastPosition.TOP_RIGHT,
         type: EToastType.DANGER,
       });
