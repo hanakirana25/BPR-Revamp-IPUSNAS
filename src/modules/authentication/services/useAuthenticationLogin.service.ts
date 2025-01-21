@@ -1,19 +1,25 @@
+// Axios
+import { AxiosError } from 'axios';
+
 // Composables
 import { useHttpAbort } from '@/app/composables';
 
 // Constants
 import { AUTHENTICATION_LOGIN_REQUEST } from '../constants';
+import { EToastPosition, EToastType } from '@/app/constants/toast.constant';
+
+// Interfaces
+import { IAuthenticationLoginPayload } from '../interfaces';
+
+// Mitt
+import eventBus from '@/plugins/mitt';
 
 // Store / Pinia
 import { useAuthenticationStore } from '../store';
 
 // Vuelidate
 import useVuelidate from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
-import { computed, reactive } from 'vue';
-
-// Vue Router
-import { useRouter } from 'vue-router';
+import { email, required } from '@vuelidate/validators';
 
 /**
  * @description Closure function that returns everything what we need into an object
@@ -26,66 +32,77 @@ export const useAuthenticationLoginService = () => {
   /**
    * @description Reactive data binding
    */
-  const authentication_isLoading = store.authentication_isLoading;
-  const authentication_formData = reactive({
-    username: '',
+  const authenticationLogin_isLoading: boolean = store.authentication_isLoading;
+  const authenticationLogin_formData: IAuthenticationLoginPayload = reactive<IAuthenticationLoginPayload>({
+    email: '',
     password: '',
   });
 
   /**
    * @description Form validations
    */
-  const authentication_formRules = computed(() => ({
-    username: { required },
+  const authenticationLogin_formRules: ComputedRef = computed(() => ({
+    email: { email, required },
     password: { required },
   }));
-  const authentication_formValidations = useVuelidate(authentication_formRules, authentication_formData, {
-    $autoDirty: true,
-  });
+  const authenticationLogin_formValidations = useVuelidate(
+    authenticationLogin_formRules,
+    authenticationLogin_formData,
+    {
+      $autoDirty: true,
+    },
+  );
 
   /**
    * @description Handle fetch api authentication login. We call the fetchAuthenticationLogin function from the store to handle the request.
    */
-  const authentication_fetchAuthenticationLogin = async () => {
+  const authenticationLogin_fetchAuthenticationLogin = async (): Promise<unknown> => {
     try {
-      const result = await store.fetchAuthentication_login(authentication_formData, {
+      const result = await store.fetchAuthentication_login(authenticationLogin_formData, {
         ...httpAbort_registerAbort(AUTHENTICATION_LOGIN_REQUEST),
       });
-      router.push({ name: 'dashboard' });
+
+      eventBus.emit('AppBaseToast', {
+        isOpen: true,
+        title: 'Success',
+        message: 'You have successfully logged in.',
+        position: EToastPosition.TOP_RIGHT,
+        type: EToastType.SUCCESS,
+      });
+
+      setTimeout(() => {
+        router.push({ name: 'user-interest' });
+      }, 1000);
 
       return Promise.resolve(result);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        return Promise.reject(error);
-      } else {
-        return Promise.reject(new Error(String(error)));
-      }
+    } catch (err: unknown) {
+      const error = err as AxiosError;
+
+      return Promise.reject(error);
     }
   };
 
   /**
    * @description Handle action on submit form.
    */
-  const authentication_onSubmit = async (): Promise<void> => {
-    authentication_formValidations.value.$touch();
-    if (authentication_formValidations.value.$invalid) return;
+  const authenticationLogin_onSubmit = async (): Promise<void> => {
+    authenticationLogin_formValidations.value.$touch();
+    if (authenticationLogin_formValidations.value.$invalid) return;
 
     try {
-      await authentication_fetchAuthenticationLogin();
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        return Promise.reject(error);
-      } else {
-        return Promise.reject(new Error(String(error)));
-      }
+      await authenticationLogin_fetchAuthenticationLogin();
+    } catch (err: unknown) {
+      const error = err as AxiosError;
+
+      return Promise.reject(error);
     }
   };
 
   return {
-    authentication_abortAllRequest: httpAbort_abortAllRequest,
-    authentication_formData,
-    authentication_formValidations,
-    authentication_isLoading,
-    authentication_onSubmit,
+    authenticationLogin_abortAllRequest: httpAbort_abortAllRequest,
+    authenticationLogin_formData,
+    authenticationLogin_formValidations,
+    authenticationLogin_isLoading,
+    authenticationLogin_onSubmit,
   };
 };

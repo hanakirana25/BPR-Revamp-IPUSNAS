@@ -12,20 +12,18 @@
         class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8"
         :class="classNameBasedOnTypeToast"
       >
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
-          />
-        </svg>
-        <span class="sr-only">{{ iconName }}</span>
+        <img :src="dynamicIcon" alt="icon" class="w-5 h-5" />
       </div>
-      <div class="ml-3 text-sm font-normal w-full">{{ toast.message }}</div>
+
+      <section id="content" class="flex flex-col w-full ml-3">
+        <h6 class="text-base font-semibold">
+          {{ toast.title }}
+        </h6>
+
+        <p class="text-sm font-normal text-muted">
+          {{ toast.message }}
+        </p>
+      </section>
       <button
         type="button"
         class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -49,18 +47,25 @@
 </template>
 
 <script setup lang="ts">
-import eventBus from '@/plugins/mitt';
+// Icons
+import iconCheck from '@/app/assets/icons/check.svg';
+import iconCloseBlack from '@/app/assets/icons/close-black.svg';
 
 // Interfaces
 interface IProps {
   isOpen: boolean;
-  message: string;
+  title: string;
+  message?: string;
   position: EToastPosition;
   type: EToastType;
 }
 
+// Mitt
+import eventBus from '@/plugins/mitt';
+
 const toast = ref<IProps>({
   isOpen: false,
+  title: '',
   message: '',
   position: EToastPosition.TOP_RIGHT,
   type: EToastType.SUCCESS,
@@ -69,14 +74,14 @@ const toast = ref<IProps>({
 /**
  * @description Handle dynamic icon name of toast icon
  */
-const iconName: ComputedRef<string> = computed(() => {
+const dynamicIcon: ComputedRef<string> = computed(() => {
   switch (toast.value.type) {
     case EToastType.DANGER:
-      return 'Error icon';
+      return iconCloseBlack;
     case EToastType.WARNING:
       return 'Warning icon';
     default:
-      return 'Check icon';
+      return iconCheck;
   }
 });
 
@@ -155,7 +160,7 @@ const onClose = (): void => {
   toast.value.isOpen = false;
 };
 
-eventBus.on(EToastType.DANGER, (params: unknown) => {
+eventBus.on('AppBaseToast', (params: unknown) => {
   console.log('params', params);
   toast.value = params as IProps;
 });

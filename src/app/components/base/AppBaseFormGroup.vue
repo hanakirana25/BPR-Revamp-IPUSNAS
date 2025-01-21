@@ -4,9 +4,12 @@
     <slot
       :isError="!!error"
       :isValid="isInvalid"
-      :classes="{ 'border border-solid border-red-600': !!error, 'p-success': !isInvalid }"
+      :classes="{ 'border border-solid border-red-600 rounded-lg': !!error, 'p-success': !isInvalid }"
     />
-    <small class="text-red-600">{{ message }}</small>
+
+    <template v-if="isInvalid">
+      <small class="text-red-600 text-xs font-medium mt-4">{{ message }}</small>
+    </template>
   </div>
 </template>
 
@@ -39,7 +42,7 @@ const props = withDefaults(defineProps<IProps>(), {
   isNameAsPlaceholder: false,
   isNotHaveSpacing: false,
   name: '',
-  spacingBottom: 'mb-4',
+  spacingBottom: '',
   validators: undefined,
 });
 

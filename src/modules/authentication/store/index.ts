@@ -1,12 +1,20 @@
-import { defineStore } from 'pinia';
+// Constants
+import { AUTHENTICATION_ENDPOINT_LOGIN, AUTHENTICATION_ENDPOINT_SIGN_UP } from '../constants';
 
 // Interfaces
-import { AxiosRequestConfig } from 'axios';
-import { IAuthenticationResponse, IAuthenticationStateStore } from '../interfaces';
+import { AxiosError, AxiosRequestConfig } from 'axios';
+import {
+  IAuthenticationLoginPayload,
+  IAuthenticationResponse,
+  IAuthenticationSignUpPayload,
+  IAuthenticationStateStore,
+} from '../interfaces';
 
 // Plugins
 import httpClient from '@/plugins/axios';
-import { AUTHENTICATION_ENDPOINT_LOGIN } from '../constants';
+
+// Pinia
+import { defineStore } from 'pinia';
 
 export const useAuthenticationStore = defineStore('authentication', {
   state: (): IAuthenticationStateStore => ({
@@ -27,7 +35,7 @@ export const useAuthenticationStore = defineStore('authentication', {
      * @access public
      */
     async fetchAuthentication_login(
-      payload: unknown,
+      payload: IAuthenticationLoginPayload,
       requestConfigurations: AxiosRequestConfig,
     ): Promise<IAuthenticationResponse> {
       this.authentication_isLoading = true;
@@ -39,7 +47,37 @@ export const useAuthenticationStore = defineStore('authentication', {
         this.authentication_token = response.data.token;
 
         return Promise.resolve(response.data);
-      } catch (error) {
+      } catch (err: unknown) {
+        const error = err as AxiosError;
+
+        return Promise.reject(error);
+      } finally {
+        this.authentication_isLoading = false;
+      }
+    },
+
+    /**
+     * @description Handle fetch api authentication sign-up.
+     * @url /authentication/register
+     * @method POST
+     * @access public
+     */
+    async fetchAuthentication_signUp(
+      payload: IAuthenticationSignUpPayload,
+      requestConfigurations: AxiosRequestConfig,
+    ): Promise<IAuthenticationResponse> {
+      this.authentication_isLoading = true;
+
+      try {
+        const response = await httpClient.post<IAuthenticationResponse>(AUTHENTICATION_ENDPOINT_SIGN_UP, payload, {
+          ...requestConfigurations,
+        });
+        this.authentication_token = response.data.token;
+
+        return Promise.resolve(response.data);
+      } catch (err: unknown) {
+        const error = err as AxiosError;
+
         return Promise.reject(error);
       } finally {
         this.authentication_isLoading = false;
@@ -48,7 +86,7 @@ export const useAuthenticationStore = defineStore('authentication', {
   },
   persist: {
     key: 'authentication',
-    paths: ['authentication_token'],
+    pick: ['authentication_token'],
     storage: sessionStorage,
   },
 });

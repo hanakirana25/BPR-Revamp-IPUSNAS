@@ -4,9 +4,16 @@ export interface IAuthenticationStateStore {
   authentication_userData: unknown;
 }
 
-export interface IAuthenticationPayload {
+export interface IAuthenticationLoginPayload {
   email: string;
   password: string;
+}
+
+export interface IAuthenticationSignUpPayload {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export interface IAuthenticationResponse {
