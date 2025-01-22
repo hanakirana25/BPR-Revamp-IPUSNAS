@@ -1,7 +1,7 @@
 <template>
   <section id="authentication-sign-up" class="relative inset-0 z-0 flex flex-col p-6 gap-12">
     <header class="flex items-center gap-3"> <!-- Flex to align items horizontally -->
-      <img src="@/app/assets/icons/left-arrow.svg" alt="icon-left-arrow" class="w-6 h-6" />
+      <img src="@/app/assets/icons/left-arrow.svg" alt="icon-left-arrow" class="w-6 h-6" @click="$router.push('/home')"/>
 
       <section id="content" class="flex flex-col gap-2">
         <div class="flex items-center gap-2"> <!-- Flex for the icon and text -->

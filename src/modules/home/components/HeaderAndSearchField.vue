@@ -3,7 +3,7 @@
     <section id="top-navigation-bar" class="flex items-center justify-between w-full">
       <h6 class="font-semibold text-base text-black">Good morning, Nadia!</h6>
 
-      <img src="@/app/assets/icons/tabler_bell.svg" alt="icon-bell" class="w-6 h-6" />
+      <img src="@/app/assets/icons/tabler_bell.svg" alt="icon-bell" class="w-6 h-6" @click="$router.push('/notification')"/>
     </section>
 
     <section id="search-bar" class="flex items-center gap-4 w-full">

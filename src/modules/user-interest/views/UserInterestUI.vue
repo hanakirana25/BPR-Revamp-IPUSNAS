@@ -29,6 +29,7 @@
         class="!bg-secondary border-none font-bold font-neue-text-pro h-[52px] text-center !text-primary text-sm p-4 rounded-md [&>span]:text-sm w-full"
         label="Skip for now"
         size="large"
+        @click="$router.push('/home')"
       />
 
       <Button
